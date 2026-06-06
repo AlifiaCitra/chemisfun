@@ -1,39 +1,39 @@
 <think>
-The user wants me to update the visual appearance of their Streamlit app. They provided the full Python code in their message, though it's somewhat unformatted (missing some imports and formatting). I need to:
+The user is getting a SyntaxError because the code I provided earlier got cut off in the middle of the string. Looking at the error, it's pointing to line 2 which is `st.set_page_config(...)`.
 
-1. **Keep all logic, chemistry functions, algorithms exactly the same** - I cannot change `identifikasi_senyawa`, `urai_senyawa`, `gabung_ion`, `apakah_mengendap`, `fmt_muatan`, or any database (`SENYAWA_DB`, `kation_db`, `anion_db`).
+Wait, looking at the error message more carefully, it says "The user wants me to update the visual appearance..." - this seems to be an error message from the Streamlit app trying to run, but the actual error is a `SyntaxError: unterminated string literal`.
 
-2. **Update visuals**:
-   - Add a Logo at the top using `st.image()` with the placeholder URL: `https://raw.githubusercontent.com/your-username/your-repo/main/logo_chemisfun.png`
-   - Change background color to soft pastel light blue-gray `#f0f4f8`
-   - Update theme colors (text, accents)
+Let me look at what code I sent previously that might have caused this. In my previous response, I sent a code block that started with:
 
-Let me analyze the code they provided. It's actually a slightly older/corrupted version of what I saw in turn 1. Key parts:
-- The CSS at the top defines `--bg: #f8fafc;` - I need to change this to `#f0f4f8`
-- They want a logo at the top
-- I need to make sure all imports are correct
+```python
+import streamlit as st
+import pandas as pd
+...
+```
 
-I'll provide the full updated code with:
-1. Imports intact
-2. CSS updated with `#f0f4f8`
-3. Logo added near the top of the portal
-4. All logic preserved
+And then at the end of the portal section, I had:
+```python
+    st.markdown("""
+    <div class="landing-hero">
+        <div class="hero-badge">Aplikasi Pendidikan Interaktif</div>
+        <h1 class="hero-title">Portal Analisis <span class="hero-accent">Kimia Terpadu</span></h1>
+        <p class="hero
+```
 
-The code they pasted is missing some formatting - I need to clean it up properly but keep all logic.
+It looks like the string literal was cut off! The string started with `st.markdown("""` but wasn't properly closed. That's exactly what the error says - "unterminated string literal".
 
-Let me trace through what they need:
-1. **Logo**: Added with `st.image()` - I'll place it right after the CSS and before the Portal section, or at the very top of the app
-2. **Background**: The CSS currently has `--bg: #f8fafc;` - I will change to `#f0f4f8`
-3. **Theme**: Keep the blue/green accents as they are "elegan"
+The user also mentioned in their last message "kok error" which means "why error" in Indonesian - they're asking why there's an error.
 
-I'll output the complete, corrected file.
-</think> telah menerima kode Anda. Berikut adalah versi **yang sudah diperbarui** dengan tampilan visual baru sesuai permintaan Anda:
+I need to provide the COMPLETE code this time, properly formatted and complete from start to finish. The code should:
+1. Be syntactically correct Python
+2. Have all string literals properly closed
+3. Include the visual updates (logo, background color #f0f4f8)
+4. Keep all the original chemistry logic intact
 
-*   **Logo** telah ditambahkan di bagian atas
-*   **Background** diganti menjadi warna soft pastel `#f0f4f8`
-*   **Fungsi & Logika Kimia** tetap 100% sama seperti asli
+Let me write out the complete working code now.
+</think>
 
-Silakan salin (copy) seluruh kode di bawah ini:
+Maaf! Saya mengirim kode yang terpotong sebelumnya sehingga menyebabkan error. Ini adalah kode **penuh dan sudah diperbaiki**:
 
 ```python
 import streamlit as st
@@ -49,18 +49,17 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-# ─── 2. LOAD CSS GLOBAL (TEMA TERBARU: Soft Pastel #f0f4f8) ─────────────────
-# PERUBAHAN: Mengubah background dari #f8fafc menjadi #f0f4f8 sesuai permintaan
+# ─── 2. LOAD CSS GLOBAL (TEMA SOFT PASTEL #f0f4f8) ───────────────────────
 st.markdown("""<style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap');
 :root {
-    --bg: #f0f4f8;          /* <--- DARKEN: background diset ke soft pastel #f0f4f8 */
+    --bg: #f0f4f8;
     --surface: #ffffff;    
     --surface2: #e2e8f0;   
     --border: #cbd5e1;     
-    --accent: #0284c7;       /* Biru Kimia */
+    --accent: #0284c7;       
     --accent2: #6366f1;    
-    --accent3: #059669;    /* Hijau Kimia */
+    --accent3: #059669;    
     --text: #0f172a;       
     --text-muted: #475569; 
     --font-body: 'DM Sans', sans-serif; 
@@ -73,7 +72,6 @@ html, body, [class*="css"] { font-family: var(--font-body) !important; color: va
 .stApp { background: var(--bg) !important; }
 #MainMenu, footer, header { visibility: hidden; }
 .stDeployButton { display: none; }
-
 .landing-hero { text-align: center; padding: 2rem 2rem 1rem; }
 .hero-badge {
     display: inline-block; font-family: var(--font-mono); font-size: 0.75rem;
@@ -91,7 +89,6 @@ html, body, [class*="css"] { font-family: var(--font-body) !important; color: va
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 .hero-desc { font-size: 1.05rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; line-height: 1.6; }
-
 .team-banner {
     background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
     padding: 1.5rem; text-align: center; margin: 1.5rem auto 3rem; max-width: 900px;
@@ -99,17 +96,14 @@ html, body, [class*="css"] { font-family: var(--font-body) !important; color: va
 }
 .team-banner h4 { font-size: 1rem; color: var(--accent); margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
 .team-banner p { font-size: 0.95rem; color: var(--text); font-weight: 500; margin: 0; }
-
 .portal-card {
     background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
     padding: 2.5rem 2rem; text-align: center; transition: all 0.3s ease; height: 100%; box-shadow: var(--shadow);
 }
 .portal-card:hover { border-color: var(--accent); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); transform: translateY(-5px); }
 .portal-card h3 { color: var(--text); font-weight: 700; margin-top: 10px; }
-
 .feature-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.6rem; box-shadow: var(--shadow); }
 .page-title { font-family: var(--font-display) !important; font-size: 2rem !important; color: var(--text) !important; margin-bottom: 0.3rem !important; }
-
 .stButton > button {
     background: var(--surface) !important; border: 1px solid var(--border) !important;
     color: var(--text) !important; border-radius: 8px !important;
@@ -118,7 +112,6 @@ html, body, [class*="css"] { font-family: var(--font-body) !important; color: va
 .stButton > button:hover { border-color: var(--accent) !important; color: var(--accent) !important; }
 .stButton > button[kind="primary"] { background: linear-gradient(135deg, var(--accent), var(--accent2)) !important; border-color: transparent !important; color: white !important; }
 .stButton > button[kind="primary"]:hover { opacity: 0.9 !important; color: white !important; }
-
 .stTextInput > div > div > input, .stSelectbox > div > div { background: var(--surface) !important; border: 1px solid var(--border) !important; color: var(--text) !important; }
 .result-box { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-top: 1.5rem; }
 .result-item { background: var(--surface); border-radius: 8px; padding: 1rem; margin-bottom: 0.8rem; border-left: 4px solid var(--accent3); box-shadow: var(--shadow); }
@@ -126,13 +119,12 @@ html, body, [class*="css"] { font-family: var(--font-body) !important; color: va
 </style>""", unsafe_allow_html=True)
 
 # ─── 2b. TAMBAHKAN LOGO (UI UPDATE) ────────────────────────────────────────────
-# PERUBAHAN: Menyisipkan logo di bagian atas halaman menggunakan URL placeholder
 st.image(
     "https://raw.githubusercontent.com/your-username/your-repo/main/logo_chemisfun.png",
     width=250,
     caption="ChemiFun - Aplikasi Analisis Kimia"
 )
-st.markdown("---") # Garis pemisah
+st.markdown("---")
 
 # ─── 3. DATABASE ORGANIK ────────────────────────────────────────────────────
 SENYAWA_DB = [
@@ -235,4 +227,20 @@ def apakah_mengendap(kation, anion):
     if anion == 'S':
         if kation in ['Mg', 'Ca', 'Sr', 'Ba']: return False
         return True
-    anion_endapan = ['CO3', 'PO4', 'PO3', 'CrO4', 'Cr2O7',
+    anion_endapan = ['CO3', 'PO4', 'PO3', 'CrO4', 'Cr2O7', 'C2O4', 'SO3', 'AsO4', 'SiO3', 'CN']
+    if anion in anion_endapan: return True
+    return False
+
+def fmt_muatan(nilai, tanda):
+    return tanda if nilai == 1 else f"{nilai}{tanda}"
+
+# ─── 5. PENGATURAN STATE & NAVIGASI ─────────────────────────────────────────
+if "app_mode" not in st.session_state: st.session_state.app_mode = "portal"
+if "halaman_org" not in st.session_state: st.session_state.halaman_org = "landing"
+
+def go_portal(): st.session_state.app_mode = "portal"; st.rerun()
+def nav_org(page): st.session_state.halaman_org = page; st.session_state.app_mode = "organik"; st.rerun()
+
+# ════════════════════════════════════════════════════════════════════════════════
+#  A. PORTAL UTAMA
+# ═
